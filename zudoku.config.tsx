@@ -16,6 +16,18 @@ const config: ZudokuConfig = {
       items: ["installation", "authorization", "about"],
     },
     {
+      type: "category",
+      label: "Technical Specification (SRS)",
+      items: [
+        "srs/overview",
+        "srs/description",
+        "srs/functional",
+        "srs/non-functional",
+        "srs/interfaces",
+        "srs/acceptance",
+      ],
+    },
+    {
       type: "link",
       to: "/api",
       label: "API Reference",

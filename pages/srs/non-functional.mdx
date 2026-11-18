@@ -1,0 +1,41 @@
+---
+title: 4. Non-functional Requirements
+---
+
+## 4.1 Performance
+
+| ID | Requirement |
+| --- | --- |
+| NFR-1 | A full scan of MissionPlanner (~1M lines) takes no more than 10 minutes on a 4-core CPU with 8 GB RAM. |
+| NFR-2 | A scan of a single changed file in CI takes no more than 30 seconds. |
+
+## 4.2 Accuracy
+
+| ID | Requirement |
+| --- | --- |
+| NFR-3 | False positive rate is under 30% on a manually checked sample of 100 findings. |
+| NFR-4 | Every rule has at least one positive and one negative test case. |
+
+## 4.3 Security
+
+| ID | Requirement |
+| --- | --- |
+| NFR-5 | The tool never runs, compiles into executables or sends the analyzed code anywhere. |
+| NFR-6 | Secrets found in code are masked in reports (only the first 4 characters are shown). |
+| NFR-7 | The tool works fully offline. |
+
+## 4.4 Usability
+
+| ID | Requirement |
+| --- | --- |
+| NFR-8 | All commands have `--help`. |
+| NFR-9 | The HTML report works in any modern browser without internet. |
+| NFR-10 | Every finding has a short explanation in plain English and a link to its CWE page. |
+
+## 4.5 Maintainability and portability
+
+| ID | Requirement |
+| --- | --- |
+| NFR-11 | New rules can be added as separate classes without changing the core. |
+| NFR-12 | Unit test coverage of the rule engine is at least 80%. |
+| NFR-13 | The tool runs on Windows, Linux and macOS. |

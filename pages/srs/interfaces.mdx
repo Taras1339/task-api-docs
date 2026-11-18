@@ -1,0 +1,48 @@
+---
+title: 5. External Interfaces
+---
+
+## 5.1 Command-line interface
+
+```bash
+gcs-secscan scan <path> [--out report.html] [--format html|json|sarif]
+                        [--exclude "**/Tests/**"] [--fail-on high]
+                        [--baseline baseline.json]
+gcs-secscan rules list
+gcs-secscan db update --file cve-db.zip
+```
+
+## 5.2 Report format (JSON)
+
+```json
+{
+  "project": "MissionPlanner",
+  "scannedAt": "2026-11-18T20:00:00Z",
+  "summary": { "critical": 2, "high": 11, "medium": 34, "low": 20 },
+  "findings": [
+    {
+      "ruleId": "GCS-MAV-003",
+      "cwe": "CWE-306",
+      "severity": "high",
+      "file": "ExtLibs/Comms/CommsSerialPort.cs",
+      "line": 120,
+      "message": "MAVLink link is used without message signing.",
+      "recommendation": "Enable MAVLink 2 signing and reject unsigned packets."
+    }
+  ]
+}
+```
+
+## 5.3 Software interfaces
+
+| Interface | Purpose |
+| --- | --- |
+| Roslyn (Microsoft.CodeAnalysis) | Parsing C# code and building syntax trees |
+| MAVLink XML definitions | Knowing message IDs and field sizes |
+| NuGet project files (`.csproj`, `packages.config`) | List of dependencies |
+| Local CVE database (JSON) | Known vulnerabilities in packages |
+| GitHub Actions / GitLab CI | Running the scan and uploading SARIF |
+
+## 5.4 Hardware interfaces
+
+None. The tool does not connect to autopilots, radios or other hardware.

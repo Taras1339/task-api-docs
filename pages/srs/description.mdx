@@ -1,0 +1,50 @@
+---
+title: 2. Overall Description
+---
+
+## 2.1 Product perspective
+
+GCS-SecScan is a standalone command-line tool with an optional HTML report. It is not part of MissionPlanner. It works on a local copy of the source code.
+
+```text
+ GCS source code ──► Parser (Roslyn) ──► Rule engine ──► Findings ──► Report (HTML / JSON / SARIF)
+                                            ▲
+                       Rule set (CWE-based) ┘   Dependency checker (NuGet + CVE database)
+```
+
+## 2.2 Product functions (summary)
+
+1. Load a project (folder or `.sln` file).
+2. Build a syntax tree for every C# file.
+3. Run security rules grouped by category.
+4. Check third-party packages against known vulnerabilities.
+5. Rate and group the findings.
+6. Export a report.
+
+## 2.3 User classes
+
+| User | Needs |
+| --- | --- |
+| Security researcher / student | Run a full scan, read detailed findings with code snippets |
+| GCS developer | See issues in their own changes, run the tool in CI |
+| QA engineer | Use the report to plan security tests of the GCS |
+| Thesis supervisor | Read a short summary with statistics |
+
+## 2.4 Operating environment
+
+- Windows 10/11, Ubuntu 22.04+ or macOS 13+
+- .NET 8 SDK
+- At least 8 GB RAM for a project the size of MissionPlanner (~1M lines of code)
+
+## 2.5 Design and implementation constraints
+
+- Implementation language: C# (.NET 8), using the Roslyn compiler platform for code parsing.
+- The tool must work offline; the vulnerability database is downloaded separately.
+- The tool must never execute the analyzed code.
+- Licensed under an open-source license compatible with GPLv3 (MissionPlanner's license).
+
+## 2.6 Assumptions and dependencies
+
+- The analyzed project is C# source code that can be parsed, even if it does not compile completely.
+- MAVLink message definitions are available as XML files in the analyzed repository.
+- The thesis analysis is done on public source code only; no flight tests are planned.

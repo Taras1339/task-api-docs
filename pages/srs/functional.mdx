@@ -1,0 +1,59 @@
+---
+title: 3. Functional Requirements
+---
+
+Priority: **M**: must have, **S**: should have, **C**: could have.
+
+## 3.1 Project loading
+
+| ID | Requirement | Priority |
+| --- | --- | --- |
+| FR-1 | The user can start a scan by giving a path to a folder or a `.sln` file. | M |
+| FR-2 | The tool finds all `.cs` files and skips `bin/`, `obj/` and test folders by default. | M |
+| FR-3 | The user can exclude paths with a glob pattern (`--exclude`). | S |
+
+## 3.2 Security rules
+
+| ID | Requirement | CWE | Priority |
+| --- | --- | --- | --- |
+| FR-4 | Detect MAVLink packet parsing without length or bounds checks. | CWE-20, CWE-125 | M |
+| FR-5 | Detect handling of MAVLink commands without checking the source system ID. | CWE-345 | M |
+| FR-6 | Detect use of MAVLink v1 or MAVLink v2 without message signing. | CWE-306 | M |
+| FR-7 | Detect hardcoded passwords, API keys and tokens. | CWE-798 | M |
+| FR-8 | Detect unsafe deserialization (`BinaryFormatter`, unsafe JSON settings). | CWE-502 | M |
+| FR-9 | Detect path traversal in file operations (logs, mission files, parameters). | CWE-22 | M |
+| FR-10 | Detect unencrypted network connections (HTTP, plain TCP/UDP) to external hosts. | CWE-319 | S |
+| FR-11 | Detect downloading and running files without signature check (e.g. firmware, plugins). | CWE-494 | S |
+| FR-12 | Detect loading of plugins or scripts from user-writable folders. | CWE-829 | S |
+| FR-13 | Detect empty `catch` blocks around security-relevant code. | CWE-390 | C |
+
+## 3.3 Dependency check
+
+| ID | Requirement | Priority |
+| --- | --- | --- |
+| FR-14 | Read NuGet package references from project files. | M |
+| FR-15 | Compare package versions with a local CVE database and report vulnerable packages. | M |
+
+## 3.4 Findings and rating
+
+| ID | Requirement | Priority |
+| --- | --- | --- |
+| FR-16 | Each finding has: rule ID, CWE, severity (Critical/High/Medium/Low), file, line, code snippet and a fix recommendation. | M |
+| FR-17 | The user can mark a finding as a false positive; it is stored in a baseline file and hidden in the next scans. | S |
+| FR-18 | The tool shows statistics by category, severity and module. | M |
+
+## 3.5 Reports
+
+| ID | Requirement | Priority |
+| --- | --- | --- |
+| FR-19 | Export the report as HTML. | M |
+| FR-20 | Export the report as JSON and SARIF 2.1. | M |
+| FR-21 | Return exit code `1` when findings above a chosen severity exist (`--fail-on high`). | S |
+
+## 3.6 Use case: full scan of MissionPlanner
+
+1. The researcher clones the MissionPlanner repository.
+2. They run `gcs-secscan scan ./MissionPlanner --out report.html`.
+3. The tool parses the code, runs all rules and the dependency check.
+4. The tool writes the report and prints a summary in the console.
+5. The researcher reviews the findings, marks false positives and repeats the scan.

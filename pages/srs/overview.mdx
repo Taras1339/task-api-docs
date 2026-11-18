@@ -1,0 +1,57 @@
+---
+title: 1. Introduction
+---
+
+# Software Requirements Specification
+
+**Product:** GCS-SecScan, a security analysis tool for UAV ground control station software
+**Qualification work:** "Security analysis of the software code of UAV ground control stations using MissionPlanner as an example"
+**Author:** Taras Artiukh, group 7.F3.25-з, Faculty of Mathematics, Department of Computer Science, Zaporizhzhia National University
+**Version:** 1.0, November 2026
+**Format:** based on IEEE 830 / ISO/IEC/IEEE 29148 SRS structure
+
+## 1.1 Purpose
+
+This document describes the requirements for **GCS-SecScan**. The tool analyzes the source code of ground control station (GCS) software and reports security weaknesses. The main reference target is **MissionPlanner**, an open-source GCS for ArduPilot written in C#.
+
+The document is written for the thesis supervisor, the developer and future testers of the tool.
+
+## 1.2 Scope
+
+GCS-SecScan will:
+
+- scan a GCS source code repository (first of all C# / .NET projects);
+- find typical weaknesses: unsafe MAVLink message handling, missing input validation, hardcoded secrets, insecure network and file operations, vulnerable third-party libraries;
+- map every finding to a CWE identifier and a severity level;
+- produce an HTML/JSON report that can be used in the thesis and in a CI pipeline.
+
+GCS-SecScan will **not** change the analyzed code, connect to real aircraft or perform live attacks on a running GCS.
+
+## 1.3 Definitions and abbreviations
+
+| Term | Meaning |
+| --- | --- |
+| UAV | Unmanned aerial vehicle |
+| GCS | Ground control station: software used to plan missions and control a UAV |
+| MAVLink | Lightweight messaging protocol between a GCS and a UAV autopilot |
+| SAST | Static application security testing: analysis of code without running it |
+| CWE | Common Weakness Enumeration, a catalog of software weakness types |
+| CVSS | Common Vulnerability Scoring System |
+| SARIF | Static Analysis Results Interchange Format (JSON) |
+| SRS | Software Requirements Specification |
+
+## 1.4 References
+
+1. IEEE 830-1998 / ISO/IEC/IEEE 29148:2018, Software Requirements Specification.
+2. MissionPlanner source code: https://github.com/ArduPilot/MissionPlanner
+3. MAVLink developer guide: https://mavlink.io
+4. MITRE CWE list: https://cwe.mitre.org
+5. OWASP Code Review Guide.
+
+## 1.5 Document overview
+
+- [2. Overall description](/srs/description): product context, users, constraints.
+- [3. Functional requirements](/srs/functional)
+- [4. Non-functional requirements](/srs/non-functional)
+- [5. External interfaces](/srs/interfaces)
+- [6. Acceptance and work plan](/srs/acceptance)

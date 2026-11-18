@@ -1,0 +1,32 @@
+---
+title: 6. Acceptance and Work Plan
+---
+
+## 6.1 Acceptance criteria
+
+The product is accepted when:
+
+1. All **Must** requirements from section 3 are implemented and covered by tests.
+2. A full scan of the current MissionPlanner repository finishes without errors within the time from NFR-1.
+3. The HTML, JSON and SARIF reports open correctly and contain all fields from FR-16.
+4. A manual review of 100 findings confirms the accuracy level from NFR-3.
+5. Results of the scan are used in the analytical part of the qualification work.
+
+## 6.2 Work plan
+
+| Stage | Result | Deadline |
+| --- | --- | --- |
+| 1. Analysis | Study of MissionPlanner architecture, MAVLink and known GCS vulnerabilities | December 2026 |
+| 2. Requirements | This SRS approved by the supervisor | December 2026 |
+| 3. Design | Architecture of parser, rule engine and reports | January 2027 |
+| 4. Implementation | Rules FR-4…FR-12, dependency check, reports | February–March 2027 |
+| 5. Testing | Unit tests, scan of MissionPlanner, false positive review | April 2027 |
+| 6. Thesis | Results and conclusions in the qualification work | May 2027 |
+
+## 6.3 Risks
+
+| Risk | Mitigation |
+| --- | --- |
+| Too many false positives | Baseline file, rule tuning on real code |
+| Code that does not compile | Syntax-only analysis without full semantic model |
+| Not enough time for all rules | Implement Must rules first |
