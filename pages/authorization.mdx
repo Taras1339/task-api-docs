@@ -1,0 +1,33 @@
+---
+title: Authorization
+---
+
+Every request must be authenticated. The API supports two schemes, both described in `openapi.yaml`.
+
+## Bearer token (JWT)
+
+Send the access token in the `Authorization` header:
+
+```http
+GET /v1/projects HTTP/1.1
+Host: api.taskmanager.example.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+```
+
+## API key
+
+For scripts and integrations, send a personal key in the `X-API-Key` header:
+
+```http
+GET /v1/projects HTTP/1.1
+Host: api.taskmanager.example.com
+X-API-Key: <your-api-key>
+```
+
+## Errors
+
+A missing or invalid credential returns `401 Unauthorized` with a body like:
+
+```json
+{ "code": 401, "message": "Missing or invalid credentials" }
+```

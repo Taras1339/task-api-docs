@@ -1,0 +1,42 @@
+---
+title: Installation
+---
+
+The Task Management API is a hosted REST service, so there is nothing to install on the server side.
+To call it from TypeScript or JavaScript, use the generated SDK client.
+
+## Get the SDK
+
+```bash
+git clone https://github.com/Taras1339/task-api-sdk.git
+cd task-api-sdk
+npm install
+npm run generate
+```
+
+## First request
+
+```ts
+import { client, listProjects, createTask } from "./src/client";
+
+client.setConfig({
+  baseUrl: "https://api.taskmanager.example.com/v1",
+  headers: { Authorization: "Bearer <your-jwt>" },
+});
+
+const { data: projects } = await listProjects();
+
+await createTask({
+  path: { projectId: 1 },
+  body: { title: "Prepare mockups", priority: "high" },
+});
+```
+
+## Base URLs
+
+| Environment | URL |
+| --- | --- |
+| Production | `https://api.taskmanager.example.com/v1` |
+| Local development | `http://localhost:8080/v1` |
+
+See the [API Reference](/api) for all endpoints.
